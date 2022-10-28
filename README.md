@@ -1,11 +1,14 @@
  # Información general
 
-***
 
 *Agregar la conexión a tu BD en el archivo .env
 
 ***
 ## Rutas
+
+### Login:
+>**POST** - localhost:4001/api/auth/login     - Se envian datos en el body { }          
+
 
 ### Users:
 >**POST** - localhost:4001/api/users     - Se envian datos en el body { }          
