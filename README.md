@@ -30,3 +30,14 @@
 >
 >**DELETE**  - localhost:4001/api/categories/:id
 
+
+### Products:
+>
+>**GET** - localhost:4001/api/products?desde=0&limit=4
+>
+>**GET** - localhost:4001/api/products/:id
+>
+>**PUT** - localhost:4001/api/products/:id  - Se envian datos en el body { }         
+>
+>**DELETE**  - localhost:4001/api/products/:id
+
