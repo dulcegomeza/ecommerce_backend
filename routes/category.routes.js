@@ -17,7 +17,7 @@ router.get('/:id', [
     validateFields
 ], categoriesGetById);
 
-router.post('/',[validateJWT,
+router.post('/',[
     jsonParser,
     body('name', 'Name required').not().isEmpty(),
     validateFields], categoriesPost);
