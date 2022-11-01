@@ -9,9 +9,6 @@ const userSchema = Schema({
         type: String,
         required: [true, 'Last name required']
     },
-    age:{
-        type: String
-    },
     email:{
         type: String,
         unique : [true, 'email unique']
