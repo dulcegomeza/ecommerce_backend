@@ -25,7 +25,7 @@ const login = async (req, res) => {
 
         const token = await generateJWT(user.id);
 
-        res.json({ msg:'login ok', user, token});
+        res.json({ user, token});
     } catch (error) {
         console.log(error);
         res.status(500).json({msg: 'speak to the admin'});
