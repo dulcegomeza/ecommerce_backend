@@ -9,6 +9,26 @@ const userSchema = Schema({
         type: String,
         required: [true, 'Last name required']
     },
+    address : {
+        type: String,
+        required: [true, 'Address required']
+    },
+    city : {
+        type: String,
+        required: [true, 'City required']
+    },
+    state : {
+        type: String,
+        required: [true, 'State required']
+    },
+    cp : {
+        type: String,
+        required: [true, 'Cp required']
+    },
+    country : {
+        type: String,
+        required: [true, 'Country required']
+    },
     email:{
         type: String,
         unique : [true, 'email unique']
