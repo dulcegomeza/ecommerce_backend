@@ -28,6 +28,7 @@ router.post('/',
     usersPost);
 router.put('/:id',[
     validateJWT,
+    jsonParser,
     body('email', 'Email invalid').isEmail(),
     body('name', 'Name is required').not().isEmpty(),
     body('address', 'Country is required').not().isEmpty(),
@@ -37,7 +38,6 @@ router.put('/:id',[
     body('address', 'Address is required').not().isEmpty(),
     body('lastName', 'last name is required').not().isEmpty(),
     check('id','No Mongo id').isMongoId(), 
-    jsonParser,
     validateFields
     ], usersPut);
 
