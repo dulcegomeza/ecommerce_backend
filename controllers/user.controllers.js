@@ -2,6 +2,12 @@
 const { User } = require('../models');
 const bcryptjs = require('bcryptjs');
 
+const usersGetById = async(req, res) =>{
+    const { id } = req.params;
+    const user = await User.findById(id);
+
+    res.json(user);
+}
 
 
 const usersGet = async (req, res) => {
@@ -72,5 +78,6 @@ module.exports = {
     usersGet,
     usersPost,
     usersPut,
-    usersDelete
+    usersDelete,
+    usersGetById
 }

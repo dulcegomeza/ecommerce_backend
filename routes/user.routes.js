@@ -3,13 +3,18 @@ const { body, check } = require('express-validator');
 const bodyParser = require('body-parser');
 
 const jsonParser = bodyParser.json();
-const { usersGet, usersPost, usersPut, usersDelete } = require('../controllers/user.controllers');
+const { usersGet, usersPost, usersPut, usersDelete, usersGetById } = require('../controllers/user.controllers');
 
 const { validateFields, validateJWT } = require('../middlewares');
 
 const router = Router();
 
 router.get('/',  validateJWT,  usersGet);
+router.get('/:id', [    
+    check('id','No Mongo id').isMongoId(), 
+    validateFields
+], usersGetById );
+
 router.post('/',
     [
      jsonParser,
