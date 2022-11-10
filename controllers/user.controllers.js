@@ -19,7 +19,14 @@ const verifyUser = async (req, res) => {
 
     const userFound = {
         uid: user.id,
-        name: user.name
+        name: user.name,
+        lastName: user.lastName,
+        address:user.address,
+        city:user.city,
+        state:user.state,
+        cp:user.cp,
+        country:user.country,
+        email:user.email,
       };
 
     res.json({ user:userFound, token })

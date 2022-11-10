@@ -11,23 +11,23 @@ const userSchema = Schema({
     },
     address : {
         type: String,
-        required: [true, 'Address required']
+        default:''
     },
     city : {
         type: String,
-        required: [true, 'City required']
+        default:''
     },
     state : {
         type: String,
-        required: [true, 'State required']
+        default:''
     },
     cp : {
         type: String,
-        required: [true, 'Cp required']
+        default:''
     },
     country : {
         type: String,
-        required: [true, 'Country required']
+       default:''
     },
     email:{
         type: String,
