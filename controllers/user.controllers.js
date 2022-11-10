@@ -1,6 +1,7 @@
 
 const { User } = require('../models');
 const bcryptjs = require('bcryptjs');
+const { generateJWT } = require('../helpers/generate-jwt');
 
 const usersGetById = async(req, res) =>{
     const { id } = req.params;
@@ -10,20 +11,18 @@ const usersGetById = async(req, res) =>{
 }
 
 
-const usersGet = async (req, res) => {
+const verifyUser = async (req, res) => {
 
-    const { desde = 0, limite = 5 } = req.query;
-    //Esto sirve para listar todos los usuarios: const users = await User.find();
+    const { user }  = req;
 
-    const query = { status: true};
+    const token = await generateJWT(user.uid)
 
-    const [ users, total ] = await Promise.all([
-        User.find(query).skip(Number(desde)).limit(Number(limite)),
-        User.countDocuments(query)
-    ])
+    const userFound = {
+        uid: user.id,
+        name: user.name
+      };
 
-
-    res.json({ users, total })
+    res.json({ user:userFound, token })
 }
 
 const usersPost = async (req, res) => {
@@ -75,7 +74,7 @@ const usersDelete = async (req, res) => {
 }
 
 module.exports = {
-    usersGet,
+    verifyUser,
     usersPost,
     usersPut,
     usersDelete,
