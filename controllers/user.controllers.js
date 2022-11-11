@@ -15,7 +15,7 @@ const verifyUser = async (req, res) => {
 
     const { user }  = req;
 
-    const token = await generateJWT(user.uid)
+   // const token = await generateJWT(user.uid)
 
     const userFound = {
         uid: user.id,
@@ -29,7 +29,7 @@ const verifyUser = async (req, res) => {
         email:user.email,
       };
 
-    res.json({ user:userFound, token })
+    res.json({ user:userFound })
 }
 
 const usersPost = async (req, res) => {
