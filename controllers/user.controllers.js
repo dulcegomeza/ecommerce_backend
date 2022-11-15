@@ -26,7 +26,7 @@ const verifyUser = async (req, res) => {
         state:user.state,
         cp:user.cp,
         country:user.country,
-        email:user.email,
+        email:user.email
       };
 
     res.json({ user:userFound, token })

@@ -5,6 +5,9 @@ const ProductSchema = Schema({
         type: String,
         required: ['name required']
     },
+    description: {
+        type: String
+    },
     status: {
         type: Boolean,
         default: true
@@ -12,10 +15,6 @@ const ProductSchema = Schema({
     imgsUrl: {
         type: Array,
         default: ''
-    },
-    user: {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
     },
     category: {
         type: Schema.Types.ObjectId,
@@ -26,13 +25,15 @@ const ProductSchema = Schema({
         type: Number,
         default: 0
     },
-    description: {
-        type: String
+    discount:{
+        type: Boolean,
+        default: false
     },
-    available: {
-        type: String,
-        default: true
+    discount_percentage:{
+        type: Number,
+        default: 0
     }
+
 })
 
 ProductSchema.methods.toJSON = function () {

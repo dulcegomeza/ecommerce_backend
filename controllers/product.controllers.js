@@ -3,13 +3,12 @@ const { Product } = require('../models');
 
 const productsGet = async(req, res) =>{
 
-    const { desde = 0, limite = 5 } = req.query;
+    const { desde = 0, limite = 8 } = req.query;
 
     const query = { status: true};
 
     const [ products, total ] = await Promise.all([
         Product.find(query)
-        .populate('user', 'name')
         .populate('category', 'name')
         .skip(Number(desde)).limit(Number(limite)),
         Product.countDocuments(query)
@@ -29,7 +28,7 @@ const productsGetById = async(req, res) =>{
 
 const productsPost = async (req, res) =>{
    
-    const {status, user, name, ...resto} = req.body;
+    const {status,  name, ...resto} = req.body;
 
     const productDB = await Product.findOne({ name });
 
@@ -39,8 +38,7 @@ const productsPost = async (req, res) =>{
 
     const data = {
         ...resto,
-        name,
-        user: req.user._id
+        name
     }
 
     const product = new Product(data);
@@ -54,9 +52,7 @@ const productsPost = async (req, res) =>{
 
 const productsPut = async(req, res) =>{
     const { id } = req.params;
-    const {status, user, ...data} = req.body;
-
-    data.user = req.user._id;
+    const {status,  ...data} = req.body;
 
     const product = await Product.findByIdAndUpdate(id, data);
 
