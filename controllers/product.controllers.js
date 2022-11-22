@@ -53,8 +53,8 @@ const productsPaginadoPost = async(req, res) =>{
     .populate('category', 'name')
     .skip(Number(desd)).limit(Number(limite));
 
-    //const page_actual = page +1;
-    const page_actual = page;
+    const page_actual = page +1;
+   
 
     res.json({ products, total, total_pages, page_actual, page_next, page_afther, limite,
          desd })
