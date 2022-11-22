@@ -19,7 +19,9 @@ const productsPaginadoPost = async(req, res) =>{
         Product.countDocuments(query)
     ])
 
-    res.json({ products, total })
+    const pages = total / limite;
+
+    res.json({ products, total, pages })
 }
 
 const productsGet = async(req, res) =>{
