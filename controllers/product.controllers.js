@@ -6,7 +6,7 @@ const productsPaginadoPost = async(req, res) =>{
     const {category='', desde = 0, limite = 9 } = req.body;
 
 
-    if(category){
+    if(category!=''){
         const query = { status: true, category:category};
     }else{
         const query = { status: true};
