@@ -3,11 +3,13 @@ const { Product } = require('../models');
 
 const productsPaginadoPost = async(req, res) =>{
 
-    const {category = '', desde = 0, limite = 9, page =1 } = req.body;
+    const {category = '', desde = 0, limite = 9, pag=1 } = req.body;
 
+    let page =pag;
     let query = { status: true};
     let page_next = 0;
     let page_afther  = 0;
+    let desd = desde;
 
    
     
@@ -32,9 +34,9 @@ const productsPaginadoPost = async(req, res) =>{
     }
 
     page-=1;
-    desde = page * limite;
-    if(desde < 0){
-        desde = 0;
+    desd = page * limite;
+    if(desd < 0){
+        desd = 0;
     }
 
     if(page >= total_pages -1){
@@ -52,7 +54,7 @@ const productsPaginadoPost = async(req, res) =>{
 
     const products = await  Product.find(query)
     .populate('category', 'name')
-    .skip(Number(desde)).limit(Number(limite));
+    .skip(Number(desd)).limit(Number(limite));
 
     const page_actual = page +1;
 
