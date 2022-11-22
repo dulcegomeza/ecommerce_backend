@@ -24,7 +24,7 @@ router.post('/', [validateJWT,
     check('category').custom(categoryExists),
     validateFields], productsPost);
 
-router.post('/paginado', [validateJWT,
+router.post('/paginado', [
     jsonParser,
     body('category', 'Category no mongo id').isMongoId(),
     check('category').custom(categoryExists),
