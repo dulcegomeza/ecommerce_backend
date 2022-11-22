@@ -8,27 +8,33 @@ const productsPaginadoPost = async(req, res) =>{
     let query = { status: true};
     let page_next = 0;
     let page_afther  = 0;
+
+   
     
     if(category!=''){
         query = { status: true, category: category};
     }
 
-    if(desde < 0){
-        desde = 0;
-    }
-   
 
-    const [ products, total ] = await Promise.all([
+    const total = await Product.countDocuments(query);
+
+   /* const [ products, total ] = await Promise.all([
         Product.find(query)
         .populate('category', 'name')
         .skip(Number(desde)).limit(Number(limite)),
         Product.countDocuments(query)
-    ])
+    ])*/
 
     const total_pages = Math.ceil(total / limite);
 
     if(page > total_pages){
         page = total_pages;
+    }
+
+    page-=1;
+    desde = page * limite;
+    if(desde < 0){
+        desde = 0;
     }
 
     if(page >= total_pages -1){
@@ -44,10 +50,11 @@ const productsPaginadoPost = async(req, res) =>{
     }
 
 
+    const products = await  Product.find(query)
+    .populate('category', 'name')
+    .skip(Number(desde)).limit(Number(limite));
+
     const page_actual = page +1;
-
-
-   
 
     res.json({ products, total, total_pages, page_actual, page_next, page_afther })
 }
