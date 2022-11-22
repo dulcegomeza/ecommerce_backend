@@ -1,6 +1,28 @@
 
 const { Product } = require('../models');
 
+const productsPaginadoPost = async(req, res) =>{
+
+    const {category='', desde = 0, limite = 9 } = req.body;
+
+
+    if(category){
+        const query = { status: true, category:category};
+    }else{
+        const query = { status: true};
+    }
+   
+
+    const [ products, total ] = await Promise.all([
+        Product.find(query)
+        .populate('category', 'name')
+        .skip(Number(desde)).limit(Number(limite)),
+        Product.countDocuments(query)
+    ])
+
+    res.json({ products, total })
+}
+
 const productsGet = async(req, res) =>{
 
     const { desde = 0, limite = 8 } = req.query;
@@ -73,5 +95,6 @@ module.exports = {
     productsGetById,
     productsPost,
     productsPut,
-    productsDelete
+    productsDelete,
+    productsPaginadoPost
 }
