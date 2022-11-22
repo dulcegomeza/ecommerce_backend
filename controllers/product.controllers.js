@@ -30,7 +30,7 @@ const productsPaginadoPost = async(req, res) =>{
         page = total_pages;
     }
 
-    page-=1;
+   /* page-=1;*/
     desd = page * limite;
     if(desd < 0){
         desd = 0;
@@ -53,9 +53,11 @@ const productsPaginadoPost = async(req, res) =>{
     .populate('category', 'name')
     .skip(Number(desd)).limit(Number(limite));
 
-    const page_actual = page +1;
+    //const page_actual = page +1;
+    const page_actual = page;
 
-    res.json({ products, total, total_pages, page_actual, page_next, page_afther, desd })
+    res.json({ products, total, total_pages, page_actual, page_next, page_afther, limite,
+         desd })
 }
 
 const productsGet = async(req, res) =>{
