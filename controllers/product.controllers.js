@@ -30,7 +30,7 @@ const productsPaginadoPost = async(req, res) =>{
         page = total_pages;
     }
 
-    page =-1;
+    page = pag -1;
     desd = page * limite;
 
     if(desd < 0){
