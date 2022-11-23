@@ -3,13 +3,13 @@ const { Product } = require('../models');
 
 const productsPaginadoPost = async(req, res) =>{
 
-    const {category = '', desde = 0, limite = 9, pag=1 } = req.body;
+    const {category = '', limite = 9} = req.body;
 
-    let page =pag;
+    let page = req.body.pag;
     let query = { status: true};
-    let page_next = 0;
-    let page_afther  = 0;
-    let desd = desde;
+   /* let page_next = 0;
+    let page_afther  = 0;*/
+    let desd = req.body.desde;
     
     if(category!=''){
         query = { status: true, category: category};
@@ -37,17 +37,17 @@ const productsPaginadoPost = async(req, res) =>{
         desd = 0;
     }
 
-    if(page >= total_pages -1){
+   /* if(page >= total_pages -1){
         page_next = 1;
     }else{
         page_next = page + 2;
-    }
+    }*/
 
-    if(page <1){
+   /* if(page <1){
         page_afther = total_pages;
     }else{
         page_afther = page;
-    }
+    }*/
 
 
     const products = await  Product.find(query)
@@ -57,8 +57,7 @@ const productsPaginadoPost = async(req, res) =>{
     const page_actual = page +1;
    
 
-    res.json({ products, total, total_pages, page_actual, page_next, page_afther, limite,
-         desd })
+    res.json({ products, total, total_pages, page_actual, limite, desd })
 }
 
 const productsGet = async(req, res) =>{
