@@ -3,13 +3,13 @@ const { Product } = require('../models');
 
 const productsPaginadoPost = async(req, res) =>{
 
-    const {category = '', limite = 9} = req.body;
+    const {category = '', limite = 9, desde=0, pag=1} = req.body;
 
-    let page = req.body.pag;
+    let page = pag;
     let query = { status: true};
    /* let page_next = 0;
     let page_afther  = 0;*/
-    let desd = req.body.desde;
+    let desd = desde;
     
     if(category!=''){
         query = { status: true, category: category};
