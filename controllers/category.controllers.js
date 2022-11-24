@@ -1,6 +1,7 @@
 
 const { Categorie } = require('../models');
 
+
 const categoriesGet = async(req, res) =>{
 
     const { desde = 0, limite = 5 } = req.query;
@@ -29,7 +30,6 @@ const categoriesPost = async (req, res) =>{
    
     const {user, status, ...resto} = req.body;
 
-    //validar que una categoria ya existe
     const categoryDB = await Categorie.findOne({ 'name':resto.name });
 
     if(categoryDB){
