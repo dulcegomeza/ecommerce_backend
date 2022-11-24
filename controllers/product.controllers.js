@@ -8,12 +8,14 @@ const productsPaginadoPost = async (req, res) => {
     let query = { status: true };
     let desd = desde;
 
-    if (category != '') {
-        query =  {$or: [{name : search}, {price: search}], $and: [{status:true}, {category: category}]};
-    }else{
-        query = { $or: [{name : search}, {price: search}], $and: [{status:true}]};
-    }
     const regex = new RegExp(search,'i');
+
+    if (category != '') {
+        query =  {$or: [{name : regex}, {price: regex}], $and: [{status:true}, {category: category}]};
+    }else{
+        query = { $or: [{name : regex}, {price: regex}], $and: [{status:true}]};
+    }
+  
 
     const total = await Product.countDocuments(query);
 
