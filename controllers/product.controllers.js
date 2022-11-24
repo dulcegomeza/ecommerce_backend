@@ -10,10 +10,12 @@ const productsPaginadoPost = async (req, res) => {
 
     const regex = new RegExp(search,'i');
 
-    if (category != '') {
+    if (category != '' && serch!='') {
         query =  {$or: [{name : regex}, {price: regex}], $and: [{status:true}, {category: category}]};
+    }else if(category != ''){
+        query = { status:true, category: category};
     }else{
-        query = { $or: [{name : regex}, {price: regex}], $and: [{status:true}]};
+        query = { status:true }
     }
   
 
