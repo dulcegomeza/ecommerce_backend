@@ -35,6 +35,7 @@ const productsPaginadoPost = async (req, res) => {
     }
 
     const products = await Product.find(query)
+        .populate('category', 'name')
         .skip(Number(desd)).limit(Number(limite));
 
     const page_actual = page + 1;
