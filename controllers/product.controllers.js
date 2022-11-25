@@ -39,7 +39,7 @@ const productsPaginadoPost = async (req, res) => {
 
     const page_actual = page + 1;
 
-    res.json({ products, total, total_pages, page_actual, limite, desd })
+    res.json({ products, total, total_pages, page_actual, limite, desd, regex, search })
 }
 
 const productsGet = async (req, res) => {
