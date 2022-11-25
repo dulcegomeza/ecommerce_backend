@@ -14,9 +14,7 @@ const productsPaginadoPost = async (req, res) => {
         query = { status: true, category: category, name: search };
     } else if (category != '') {
         query = { status: true, category: category };
-    } else {
-        query = { status: true }
-    }
+    } 
 
 
     const total = await Product.countDocuments(query);
