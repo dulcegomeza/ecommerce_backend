@@ -2,7 +2,7 @@ const { Product } = require('../models');
 
 const productsPaginadoPost = async (req, res) => {
 
-    const { category = '', limite = 9, search='', desde = 0, pag = 1 } = req.body;
+    const { category = '', limite = 9, search = '', desde = 0, pag = 1 } = req.body;
 
     let page = pag;
     let query = { status: true };
@@ -10,16 +10,19 @@ const productsPaginadoPost = async (req, res) => {
 
     const regex = RegExp(search, 'i');
 
-    if (category != '' && serch!='') {
-        query =  { status:true, category: category, name:regex};
-    }else if(category != ''){
-        query = { status:true, category: category};
-    }else{
-        query = { status:true }
+    if (category != '' && serch != '') {
+        query = { status: true, category: category, name: regex };
+    } else if (category != '') {
+        query = { status: true, category: category };
+    } else {
+        query = { status: true }
     }
-  
 
-    const total = await Product.countDocuments(query);
+
+    const total = await Product.countDocuments({
+        $or: [{ name: regex }, { category: category }],
+        $and: [{ status: true }]
+    });
 
     let total_pages = Math.ceil(total / limite);
 
@@ -34,7 +37,10 @@ const productsPaginadoPost = async (req, res) => {
         desd = 0;
     }
 
-    const products = await Product.find(query)
+    const products = await Product.find({
+        $or: [{ name: regex }, { category: category }],
+        $and: [{ status: true }]
+    })
         .populate('category', 'name')
         .skip(Number(desd)).limit(Number(limite));
 
