@@ -2,20 +2,15 @@ const { Product } = require('../models');
 
 const productsPaginadoPost = async (req, res) => {
 
-    const { category = '', limite = 9, search = '', desde = 0, pag = 1 } = req.body;
+    const { category = '', limite = 9,  desde = 0, pag = 1 } = req.body;
 
     let page = pag;
     let query = { status: true };
     let desd = desde;
 
-    const regex = RegExp(search, 'i');
-
-    if (category != '' && serch != '') {
-        query = { status: true, category: category, name: search };
-    } else if (category != '') {
-        query = { status: true, category: category };
+    if (category != '' ) {
+        query = { status: true, category: category};
     } 
-
 
     const total = await Product.countDocuments(query);
 
