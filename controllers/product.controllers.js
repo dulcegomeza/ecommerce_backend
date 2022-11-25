@@ -11,7 +11,7 @@ const productsPaginadoPost = async (req, res) => {
     const regex = RegExp(search, 'i');
 
     if (category != '' && serch != '') {
-        query = { status: true, category: category, name: regex };
+        query = { status: true, category: category, name: search };
     } else if (category != '') {
         query = { status: true, category: category };
     } else {
@@ -19,10 +19,7 @@ const productsPaginadoPost = async (req, res) => {
     }
 
 
-    const total = await Product.countDocuments({
-        name: regex , category: category,
-       status: true 
-    });
+    const total = await Product.countDocuments(query);
 
     let total_pages = Math.ceil(total / limite);
 
@@ -37,10 +34,7 @@ const productsPaginadoPost = async (req, res) => {
         desd = 0;
     }
 
-    const products = await Product.find({
-        name: regex , category: category,
-        status: true 
-    })
+    const products = await Product.find(query)
         .populate('category', 'name')
         .skip(Number(desd)).limit(Number(limite));
 
