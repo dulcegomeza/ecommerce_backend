@@ -20,8 +20,8 @@ const productsPaginadoPost = async (req, res) => {
 
 
     const total = await Product.countDocuments({
-        $or: [{ name: regex }, { category: category }],
-        $and: [{ status: true }]
+        name: regex , category: category,
+       status: true 
     });
 
     let total_pages = Math.ceil(total / limite);
@@ -38,8 +38,8 @@ const productsPaginadoPost = async (req, res) => {
     }
 
     const products = await Product.find({
-        $or: [{ name: regex }, { category: category }],
-        $and: [{ status: true }]
+        name: regex , category: category,
+        status: true 
     })
         .populate('category', 'name')
         .skip(Number(desd)).limit(Number(limite));
