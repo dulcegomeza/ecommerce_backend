@@ -8,7 +8,7 @@ const productsPaginadoPost = async (req, res) => {
     let query = { status: true };
     let desd = desde;
 
-    const regex = new RegExp(search,'i');
+    const regex = RegExp(search, 'i');
 
     if (category != '' && serch!='') {
         query =  { status:true, category: category, name:regex};
