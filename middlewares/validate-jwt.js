@@ -13,16 +13,15 @@ const validateJWT = async(req, res, next) => {
 
         const user = await User.findById(uid);
 
-        //validamos que se encuentre el uid
-        if(!user){
+        if (!user) {
             return res.status(400).json({ msg: 'Token invalid - user not exist' });
         }
-        //validamos que ese user este activo/status true
-        if(!user.status){
+
+        if (!user.status) {
             return res.status(400).json({ msg: 'Token invalid' });
         }
 
-        req.user=user;
+        req.user = user;
         next();
     } catch (error) {
         return res.status(400).json({ msg: 'token invalid' });

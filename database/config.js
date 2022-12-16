@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 
-const dbConnection = async () =>{
+const dbConnection = async() => {
     try {
         await mongoose.connect(process.env.MONGODB_URI);
-        console.log('Base de datos  online');
+        console.log('Database online');
     } catch (error) {
-        throw new Error('Error al iniciar la base de datos');
+        throw new Error('Error');
     }
 }
 
-module.exports = {dbConnection};
+module.exports = { dbConnection };
