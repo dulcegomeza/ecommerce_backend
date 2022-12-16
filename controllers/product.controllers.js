@@ -31,7 +31,7 @@ const productsPaginadoPost = async(req, res) => {
 
     const products = await Product.find(query)
         .populate('category', 'name')
-        .skip(Number(desd)).limit(Number(limit));
+        .skip(Number(from)).limit(Number(limit));
 
 
     res.json({ products, total, total_pages, limit, from })
